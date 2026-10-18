@@ -1,0 +1,7 @@
+1dmo.cif
+1cll.cif
+3cln.cif
+1exr.cif
+1ckk.cif
+2o60.cif
+2vay.cif

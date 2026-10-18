@@ -1,0 +1,9 @@
+# Simulator outputs that are regenerated on every run
+results/
+pdbs/
+*.log
+animated.gif
+animated.tmp/
+
+# Python bytecode
+__pycache__/

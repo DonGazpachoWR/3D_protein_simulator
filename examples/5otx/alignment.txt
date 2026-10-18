@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE BlastOutput PUBLIC "-//NCBI//NCBI BlastOutput/EN" "http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd">
+<BlastOutput>
+  <BlastOutput_program>blastp</BlastOutput_program>
+  <BlastOutput_version>BLASTP 2.17.0+</BlastOutput_version>
+  <BlastOutput_reference>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.</BlastOutput_reference>
+  <BlastOutput_db>pdb</BlastOutput_db>
+  <BlastOutput_query-ID>Query_2777849</BlastOutput_query-ID>
+  <BlastOutput_query-def>unnamed protein product</BlastOutput_query-def>
+  <BlastOutput_query-len>31</BlastOutput_query-len>
+  <BlastOutput_param>
+    <Parameters>
+      <Parameters_matrix>BLOSUM62</Parameters_matrix>
+      <Parameters_expect>0.05</Parameters_expect>
+      <Parameters_gap-open>11</Parameters_gap-open>
+      <Parameters_gap-extend>1</Parameters_gap-extend>
+      <Parameters_filter>F</Parameters_filter>
+    </Parameters>
+  </BlastOutput_param>
+<BlastOutput_iterations>
+<Iteration>
+  <Iteration_iter-num>1</Iteration_iter-num>
+  <Iteration_query-ID>Query_2777849</Iteration_query-ID>
+  <Iteration_query-def>unnamed protein product</Iteration_query-def>
+  <Iteration_query-len>31</Iteration_query-len>
+<Iteration_hits>
+<Hit>
+  <Hit_num>1</Hit_num>
+  <Hit_id>pdb|5OTX|B</Hit_id>
+  <Hit_def>Chain B, Glucagon [Homo sapiens] &gt;pdb|5OTX|D Chain D, Glucagon [Homo sapiens]</Hit_def>
+  <Hit_accession>5OTX_B</Hit_accession>
+  <Hit_len>31</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>67.0106</Hsp_bit-score>
+      <Hsp_score>162</Hsp_score>
+      <Hsp_evalue>3.01108e-17</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>31</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>31</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>31</Hsp_identity>
+      <Hsp_positive>31</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>31</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_qseq>
+      <Hsp_hseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_hseq>
+      <Hsp_midline>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>2</Hit_num>
+  <Hit_id>pdb|5OTW|B</Hit_id>
+  <Hit_def>Chain B, Glucagon [Homo sapiens] &gt;pdb|5OTW|D Chain D, Glucagon [Homo sapiens]</Hit_def>
+  <Hit_accession>5OTW_B</Hit_accession>
+  <Hit_len>31</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>63.929</Hsp_bit-score>
+      <Hsp_score>154</Hsp_score>
+      <Hsp_evalue>4.74988e-16</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>31</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>31</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>30</Hsp_identity>
+      <Hsp_positive>30</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>31</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_qseq>
+      <Hsp_hseq>HXEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_hseq>
+      <Hsp_midline>H EGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>3</Hit_num>
+  <Hit_id>pdb|5OTV|B</Hit_id>
+  <Hit_def>Chain B, Glucagon [Homo sapiens] &gt;pdb|5OTV|D Chain D, Glucagon [Homo sapiens]</Hit_def>
+  <Hit_accession>5OTV_B</Hit_accession>
+  <Hit_len>31</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>63.929</Hsp_bit-score>
+      <Hsp_score>154</Hsp_score>
+      <Hsp_evalue>4.74988e-16</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>31</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>31</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>30</Hsp_identity>
+      <Hsp_positive>30</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>31</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_qseq>
+      <Hsp_hseq>HCEGXFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_hseq>
+      <Hsp_midline>HCEG FTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>4</Hit_num>
+  <Hit_id>pdb|3IOL|B</Hit_id>
+  <Hit_def>Chain B, Glucagon [Homo sapiens] &gt;pdb|5VAI|P Chain P, Glucagon-like peptide 1 [Homo sapiens] &gt;pdb|6VCB|P Chain P, Glucagon-like peptide 1 [Homo sapiens]</Hit_def>
+  <Hit_accession>3IOL_B</Hit_accession>
+  <Hit_len>31</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>62.7734</Hsp_bit-score>
+      <Hsp_score>151</Hsp_score>
+      <Hsp_evalue>1.34923e-15</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>31</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>31</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>29</Hsp_identity>
+      <Hsp_positive>29</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>31</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_qseq>
+      <Hsp_hseq>HAEGTFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_hseq>
+      <Hsp_midline>H EG FTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>5</Hit_num>
+  <Hit_id>pdb|4APD|A</Hit_id>
+  <Hit_def>Chain A, Glucagon-like peptide 1(7-37) [Homo sapiens]</Hit_def>
+  <Hit_accession>4APD_A</Hit_accession>
+  <Hit_len>31</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>62.003</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>3.04272e-15</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>31</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>31</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>28</Hsp_identity>
+      <Hsp_positive>29</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>31</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_qseq>
+      <Hsp_hseq>HAEGTFTSDVSSYLEGQAAKEFIAWLVRGRG</Hsp_hseq>
+      <Hsp_midline>H EG FTSDVSSYLEGQAAKEFIAWLV+GRG</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>6</Hit_num>
+  <Hit_id>pdb|5OTU|B</Hit_id>
+  <Hit_def>Chain B, Glucagon [Homo sapiens] &gt;pdb|5OTU|D Chain D, Glucagon [Homo sapiens]</Hit_def>
+  <Hit_accession>5OTU_B</Hit_accession>
+  <Hit_len>31</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>61.2326</Hsp_bit-score>
+      <Hsp_score>147</Hsp_score>
+      <Hsp_evalue>4.93465e-15</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>31</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>31</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>29</Hsp_identity>
+      <Hsp_positive>29</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>31</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_qseq>
+      <Hsp_hseq>HXEGXFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_hseq>
+      <Hsp_midline>H EG FTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>7</Hit_num>
+  <Hit_id>pdb|4ZGM|B</Hit_id>
+  <Hit_def>Chain B, Semaglutide peptide backbone; 8Aib,34R-GLP-1(7-37)-OH [Homo sapiens] &gt;pdb|7KI0|P Chain P, Semaglutide [synthetic construct]</Hit_def>
+  <Hit_accession>4ZGM_B</Hit_accession>
+  <Hit_len>31</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>61.2326</Hsp_bit-score>
+      <Hsp_score>147</Hsp_score>
+      <Hsp_evalue>5.81896e-15</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>31</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>31</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>28</Hsp_identity>
+      <Hsp_positive>29</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>31</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_qseq>
+      <Hsp_hseq>HXEGTFTSDVSSYLEGQAAKEFIAWLVRGRG</Hsp_hseq>
+      <Hsp_midline>H EG FTSDVSSYLEGQAAKEFIAWLV+GRG</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>8</Hit_num>
+  <Hit_id>pdb|1D0R|A</Hit_id>
+  <Hit_def>Chain A, GLUCAGON-LIKE PEPTIDE-1-(7-36)-AMIDE [Homo sapiens] &gt;pdb|6X18|P Chain P, Glucagon-like peptide-1 (GLP-1)(7-36)NH2 [Homo sapiens] &gt;pdb|7DUQ|P Chain P, Glucagon-like peptide 1 [Homo sapiens] &gt;pdb|9E2A|P Chain P, Glucagon [Homo sapiens] &gt;pdb|9X20|P Chain P, Glucagon-like peptide 1(7-36) [Homo sapiens] &gt;pdb|9X22|P Chain P, Glucagon-like peptide 1(7-36) [Homo sapiens]</Hit_def>
+  <Hit_accession>1D0R_A</Hit_accession>
+  <Hit_len>30</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>60.8474</Hsp_bit-score>
+      <Hsp_score>146</Hsp_score>
+      <Hsp_evalue>7.15747e-15</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>30</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>30</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>28</Hsp_identity>
+      <Hsp_positive>28</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>30</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGR</Hsp_qseq>
+      <Hsp_hseq>HAEGTFTSDVSSYLEGQAAKEFIAWLVKGR</Hsp_hseq>
+      <Hsp_midline>H EG FTSDVSSYLEGQAAKEFIAWLVKGR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>9</Hit_num>
+  <Hit_id>pdb|9EBO|P</Hit_id>
+  <Hit_def>Chain P, Glucagon-like peptide 1(7-36) [synthetic construct]</Hit_def>
+  <Hit_accession>9EBO_P</Hit_accession>
+  <Hit_len>30</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>58.9214</Hsp_bit-score>
+      <Hsp_score>141</Hsp_score>
+      <Hsp_evalue>4.0182e-14</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>30</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>30</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>27</Hsp_identity>
+      <Hsp_positive>27</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>30</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGR</Hsp_qseq>
+      <Hsp_hseq>HAEGTFTSDVSXYLEGQAAKEFIAWLVKGR</Hsp_hseq>
+      <Hsp_midline>H EG FTSDVS YLEGQAAKEFIAWLVKGR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>10</Hit_num>
+  <Hit_id>pdb|7KI1|P</Hit_id>
+  <Hit_def>Chain P, Taspoglutide [synthetic construct]</Hit_def>
+  <Hit_accession>7KI1_P</Hit_accession>
+  <Hit_len>31</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>57.7658</Hsp_bit-score>
+      <Hsp_score>138</Hsp_score>
+      <Hsp_evalue>1.22132e-13</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>30</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>30</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>27</Hsp_identity>
+      <Hsp_positive>27</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>30</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGR</Hsp_qseq>
+      <Hsp_hseq>HXEGTFTSDVSSYLEGQAAKEFIAWLVKXR</Hsp_hseq>
+      <Hsp_midline>H EG FTSDVSSYLEGQAAKEFIAWLVK R</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>11</Hit_num>
+  <Hit_id>pdb|9IVG|P</Hit_id>
+  <Hit_def>Chain P, GLP-1(9-36) [Homo sapiens] &gt;pdb|9IVM|P Chain P, GLP-1(9-36) [Homo sapiens]</Hit_def>
+  <Hit_accession>9IVG_P</Hit_accession>
+  <Hit_len>28</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>57.3806</Hsp_bit-score>
+      <Hsp_score>137</Hsp_score>
+      <Hsp_evalue>1.62097e-13</Hsp_evalue>
+      <Hsp_query-from>3</Hsp_query-from>
+      <Hsp_query-to>30</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>28</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>27</Hsp_identity>
+      <Hsp_positive>27</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>28</Hsp_align-len>
+      <Hsp_qseq>EGCFTSDVSSYLEGQAAKEFIAWLVKGR</Hsp_qseq>
+      <Hsp_hseq>EGTFTSDVSSYLEGQAAKEFIAWLVKGR</Hsp_hseq>
+      <Hsp_midline>EG FTSDVSSYLEGQAAKEFIAWLVKGR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>12</Hit_num>
+  <Hit_id>pdb|9J1P|P</Hit_id>
+  <Hit_def>Chain P, g1:Ox [synthetic construct]</Hit_def>
+  <Hit_accession>9J1P_P</Hit_accession>
+  <Hit_len>49</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>50.0618</Hsp_bit-score>
+      <Hsp_score>118</Hsp_score>
+      <Hsp_evalue>2.00877e-10</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>31</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>31</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>24</Hsp_identity>
+      <Hsp_positive>25</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>31</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKGRG</Hsp_qseq>
+      <Hsp_hseq>HAEGTFTSDVSSYLEGQAAKCFIAWLINCPG</Hsp_hseq>
+      <Hsp_midline>H EG FTSDVSSYLEGQAAK FIAWL+   G</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>13</Hit_num>
+  <Hit_id>pdb|6WHC|E</Hit_id>
+  <Hit_def>Chain E, Dual-agonist peptide [synthetic construct] &gt;pdb|8JIQ|E Chain E, Peptide 15 [synthetic construct] &gt;pdb|8JIS|P Chain P, Peptide 15 [synthetic construct]</Hit_def>
+  <Hit_accession>6WHC_E</Hit_accession>
+  <Hit_len>29</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>45.0542</Hsp_bit-score>
+      <Hsp_score>105</Hsp_score>
+      <Hsp_evalue>1.33195e-08</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>28</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>28</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>19</Hsp_identity>
+      <Hsp_positive>22</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>28</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVK</Hsp_qseq>
+      <Hsp_hseq>HSQGTFTSDYSKYLDEQAAKEFIAWLMN</Hsp_hseq>
+      <Hsp_midline>H +G FTSD S YL+ QAAKEFIAWL+ </Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>14</Hit_num>
+  <Hit_id>pdb|9MZF|P</Hit_id>
+  <Hit_def>Chain P, Peptide 15 [synthetic construct] &gt;pdb|9N04|P Chain P, Peptide15: Dual agonist peptide [synthetic construct]</Hit_def>
+  <Hit_accession>9MZF_P</Hit_accession>
+  <Hit_len>30</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>45.0542</Hsp_bit-score>
+      <Hsp_score>105</Hsp_score>
+      <Hsp_evalue>1.3484e-08</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>28</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>28</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>19</Hsp_identity>
+      <Hsp_positive>22</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>28</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVK</Hsp_qseq>
+      <Hsp_hseq>HSQGTFTSDYSKYLDEQAAKEFIAWLMN</Hsp_hseq>
+      <Hsp_midline>H +G FTSD S YL+ QAAKEFIAWL+ </Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>15</Hit_num>
+  <Hit_id>pdb|8JIR|P</Hit_id>
+  <Hit_def>Chain P, SAR425899 [synthetic construct]</Hit_def>
+  <Hit_accession>8JIR_P</Hit_accession>
+  <Hit_len>29</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>36.1946</Hsp_bit-score>
+      <Hsp_score>82</Hsp_score>
+      <Hsp_evalue>4.41195e-05</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>29</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>29</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>15</Hsp_identity>
+      <Hsp_positive>20</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>29</Hsp_align-len>
+      <Hsp_qseq>HCEGCFTSDVSSYLEGQAAKEFIAWLVKG</Hsp_qseq>
+      <Hsp_hseq>HSQGTFTSDLSKQKESKAAQDFIEWLKAG</Hsp_hseq>
+      <Hsp_midline>H +G FTSD+S   E +AA++FI WL  G</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+</Iteration_hits>
+  <Iteration_stat>
+    <Statistics>
+      <Statistics_db-num>186276</Statistics_db-num>
+      <Statistics_db-len>54114485</Statistics_db-len>
+      <Statistics_hsp-len>0</Statistics_hsp-len>
+      <Statistics_eff-space>0</Statistics_eff-space>
+      <Statistics_kappa>0.041</Statistics_kappa>
+      <Statistics_lambda>0.267</Statistics_lambda>
+      <Statistics_entropy>0.14</Statistics_entropy>
+    </Statistics>
+  </Iteration_stat>
+</Iteration>
+</BlastOutput_iterations>
+</BlastOutput>

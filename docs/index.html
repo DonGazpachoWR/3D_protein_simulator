@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D Protein Simulator</title>
+<meta name="description" content="Pseudo-molecular dynamics animations built from experimentally solved PDB structures with BLAST, Biopython and PyMOL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f8f7;
+  --surface: #ffffff;
+  --surface-2: #eef1f0;
+  --text: #16201d;
+  --muted: #56635f;
+  --border: #d9dfdc;
+  --accent: #0f7f86;
+  --accent-ink: #ffffff;
+  --well: #000000;
+  --code-bg: #0f1615;
+  --code-text: #d7e4e0;
+  --spectrum: linear-gradient(90deg, #00c853, #00bcd4 50%, #1a237e);
+  --radius: 10px;
+  --max: 1120px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b100f;
+    --surface: #121918;
+    --surface-2: #19221f;
+    --text: #e4ece9;
+    --muted: #9aaaa5;
+    --border: #26322f;
+    --accent: #3cc6c9;
+    --accent-ink: #06201f;
+    --code-bg: #070b0a;
+    --code-text: #d7e4e0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b100f;
+  --surface: #121918;
+  --surface-2: #19221f;
+  --text: #e4ece9;
+  --muted: #9aaaa5;
+  --border: #26322f;
+  --accent: #3cc6c9;
+  --accent-ink: #06201f;
+  --code-bg: #070b0a;
+  --code-text: #d7e4e0;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/1.6 "IBM Plex Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); }
+code, pre, .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+code { font-size: .9em; background: var(--surface-2); padding: .1em .35em; border-radius: 4px; }
+img, video { display: block; max-width: 100%; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+/* Header */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.top .wrap { display: flex; align-items: center; gap: 16px; height: 56px; }
+.brand { font-weight: 600; text-decoration: none; color: var(--text); display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.brand-bar { width: 22px; height: 6px; border-radius: 3px; background: var(--spectrum); }
+.nav { display: flex; gap: 18px; margin-left: auto; overflow-x: auto; }
+.nav a { color: var(--muted); text-decoration: none; font-size: 14px; white-space: nowrap; }
+.nav a:hover { color: var(--text); }
+@media (max-width: 640px) { .nav .opt { display: none; } }
+
+/* Hero */
+.hero { padding: 56px 0 40px; }
+.hero-grid { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 48px; } }
+.eyebrow { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.08; margin: 0 0 18px; letter-spacing: -.02em; font-weight: 600; }
+.lede { font-size: 18px; color: var(--muted); margin: 0 0 26px; max-width: 34em; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 8px; font-weight: 500; font-size: 15px;
+  text-decoration: none; border: 1px solid var(--border); color: var(--text); background: var(--surface);
+}
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.hero-media { position: relative; }
+.hero-media .well { aspect-ratio: 840 / 594; }
+.hero-caption { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+.well {
+  background: var(--well); border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); position: relative;
+}
+.well video { width: 100%; height: 100%; object-fit: contain; }
+.spectrum-rule { height: 4px; border-radius: 2px; background: var(--spectrum); width: 72px; margin-bottom: 18px; }
+
+/* Sections */
+section { padding: 56px 0; border-top: 1px solid var(--border); }
+h2 { font-size: clamp(26px, 3.2vw, 34px); line-height: 1.15; margin: 0 0 14px; letter-spacing: -.01em; font-weight: 600; }
+h3 { font-size: 18px; margin: 0 0 8px; font-weight: 600; }
+.section-intro { color: var(--muted); max-width: 46em; margin: 0 0 32px; font-size: 17px; }
+
+/* Pipeline */
+.pipeline { display: grid; gap: 14px; counter-reset: step; list-style: none; padding: 0; margin: 0; }
+@media (min-width: 760px) { .pipeline { grid-template-columns: repeat(5, 1fr); } }
+.step {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 16px 16px; position: relative; display: flex; flex-direction: column;
+}
+.step::before {
+  counter-increment: step; content: counter(step);
+  font: 500 13px "IBM Plex Mono", monospace; color: var(--muted);
+}
+.step h3 { margin-top: 6px; font-size: 16px; }
+.step p { margin: 0; font-size: 14px; color: var(--muted); }
+.tag { display: inline-block; font: 500 12px "IBM Plex Mono", monospace; background: var(--surface-2); color: var(--text); padding: 2px 7px; border-radius: 4px; margin: 8px 6px 0 0; }
+.tag.skip { background: transparent; border: 1px dashed var(--border); color: var(--muted); }
+.step > div:not(.step-bar) { margin-top: auto; }
+.step-bar { height: 3px; border-radius: 2px; margin-top: 14px; }
+.pipeline-note { margin-top: 18px; font-size: 14px; color: var(--muted); }
+
+/* Modes */
+.modes { display: grid; gap: 20px; }
+@media (min-width: 820px) { .modes { grid-template-columns: 1fr 1fr; } }
+.mode { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.mode .well { border: 0; border-radius: 0; aspect-ratio: 840 / 594; }
+.mode-body { padding: 20px; }
+.mode-body p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+.facts { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; font-size: 14px; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; }
+.flag { font: 500 12px "IBM Plex Mono", monospace; color: var(--accent); }
+
+/* Gallery */
+.gallery { display: grid; gap: 20px; }
+@media (min-width: 700px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.card .well { border: 0; border-radius: 0; aspect-ratio: 4 / 3; }
+.card-body { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.card-title { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.card-title h3 { margin: 0; font-size: 16px; }
+.pdb { font: 500 13px "IBM Plex Mono", monospace; color: var(--muted); }
+.card p { margin: 0; font-size: 14px; color: var(--muted); }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button {
+  font: 500 13px "IBM Plex Sans", sans-serif; padding: 5px 10px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--surface-2); color: var(--text); cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.seg button:focus-visible, .btn:focus-visible, .copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.meta { font-size: 13px; color: var(--muted); margin-top: auto; }
+
+/* Usage */
+.usage-grid { display: grid; gap: 28px; }
+@media (min-width: 900px) { .usage-grid { grid-template-columns: 1fr 1fr; } }
+.code { position: relative; margin: 0 0 18px; }
+.code pre {
+  margin: 0; background: var(--code-bg); color: var(--code-text); padding: 16px 18px; border-radius: 8px;
+  overflow-x: auto; font-size: 13.5px; line-height: 1.55;
+}
+.code .c { color: #7d918b; }
+.copy {
+  position: absolute; top: 8px; right: 8px; font: 500 12px "IBM Plex Sans", sans-serif;
+  background: #22302d; color: #d7e4e0; border: 0; border-radius: 5px; padding: 4px 9px; cursor: pointer;
+}
+.label { font-size: 14px; font-weight: 500; margin: 0 0 8px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-weight: 600; background: var(--surface-2); }
+tr:last-child td { border-bottom: 0; }
+td code { white-space: nowrap; }
+
+/* Limits */
+.limits { display: grid; gap: 16px; }
+@media (min-width: 760px) { .limits { grid-template-columns: repeat(2, 1fr); } }
+.limit { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+.limit p { margin: 0; color: var(--muted); font-size: 15px; }
+
+footer { border-top: 1px solid var(--border); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="brand-bar" aria-hidden="true"></span>3D Protein Simulator</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#modes">Modes</a>
+      <a href="#gallery">Gallery</a>
+      <a class="opt" href="#usage">Usage</a>
+      <a class="opt" href="https://github.com/DonGazpachoWR/3D_protein_simulator">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Structural bioinformatics · Python · PyMOL</p>
+        <h1>Watch proteins move using structures that already exist.</h1>
+        <p class="lede">The simulator collects experimental structures of a protein from the PDB, fits them onto each other and plays them as one animation. You see the conformational change without running a molecular dynamics simulation.</p>
+        <div class="cta">
+          <a class="btn primary" href="#usage">Get started</a>
+          <a class="btn" href="https://github.com/DonGazpachoWR/3D_protein_simulator">View on GitHub</a>
+        </div>
+      </div>
+      <figure class="hero-media" style="margin:0">
+        <div class="well">
+          <video data-auto muted loop playsinline preload="metadata"
+                 poster="media/4ake_align.jpg" src="media/4ake_align.mp4"
+                 aria-label="Adenylate kinase closing its lid and NMP domains"></video>
+        </div>
+        <figcaption class="hero-caption">Adenylate kinase (<span class="mono">4AKE</span> family) moving from the open to the closed state, morphed between four crystal structures.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="spectrum-rule" aria-hidden="true"></div>
+      <h2>From a PDB code to an animation in five steps</h2>
+      <p class="section-intro">Each animation frame is either a real deposited structure or a linear interpolation between two of them, so this is a <em>pseudo</em>-dynamics method. Any step can be skipped by supplying its result, which avoids repeating the slow network queries.</p>
+      <ol class="pipeline">
+        <li class="step">
+          <h3>Fetch the sequence</h3>
+          <p>The PDB code is searched in NCBI Entrez and the FASTA sequence of the first matching protein record is downloaded.</p>
+          <div><span class="tag">Entrez</span><span class="tag">-id</span></div>
+          <div class="step-bar" style="background-color:#00c853"></div>
+        </li>
+        <li class="step">
+          <h3>Find related structures</h3>
+          <p>BLASTp against the PDB keeps hits with ≥ 99 % identity and E ≤ 0.05. Near-identity means the differences are conformational, not evolutionary.</p>
+          <div><span class="tag">BLASTp</span><span class="tag skip">skip: -al / -l</span></div>
+          <div class="step-bar" style="background-color:#00c2a0"></div>
+        </li>
+        <li class="step">
+          <h3>Download mmCIF</h3>
+          <p>Each hit is downloaded with Biopython <span class="mono">PDBList</span> into <span class="mono">pdbs/</span>. Files already present are reused.</p>
+          <div><span class="tag">Biopython</span></div>
+          <div class="step-bar" style="background-color:#00bcd4"></div>
+        </li>
+        <li class="step">
+          <h3>Filter and map chains</h3>
+          <p>Structures with fewer than half or more than twice the reference's atoms are dropped. Chain IDs are translated from <span class="mono">label_asym_id</span> to the author IDs.</p>
+          <div><span class="tag">0.5–2× atoms</span></div>
+          <div class="step-bar" style="background-color:#1a73c8"></div>
+        </li>
+        <li class="step">
+          <h3>Fit and render</h3>
+          <p>A PyMOL script loads the chains, fits each structure onto the first, stacks them as states and exports <span class="mono">animated.gif</span>.</p>
+          <div><span class="tag">PyMOL</span><span class="tag">ffmpeg</span></div>
+          <div class="step-bar" style="background-color:#1a237e"></div>
+        </li>
+      </ol>
+      <p class="pipeline-note">The reference structure is the first file: the first BLAST hit, or the first line of your list when you use <code>-l</code>. With a list, the order of its lines is also the order of the animation.</p>
+    </div>
+  </section>
+
+  <section id="modes">
+    <div class="wrap">
+      <div class="spectrum-rule" aria-hidden="true"></div>
+      <h2>Two ways to animate the same structures</h2>
+      <p class="section-intro">Both modes start from the same filtered set. They differ in which atoms are fitted and in what happens between one structure and the next. Below, the same adenylate kinase structures shown both ways.</p>
+      <div class="modes">
+        <article class="mode">
+          <div class="well">
+            <video data-auto muted loop playsinline preload="none"
+                   poster="media/4ake_super.jpg" src="media/4ake_super.mp4"
+                   aria-label="Adenylate kinase in superposition mode"></video>
+          </div>
+          <div class="mode-body">
+            <h3>Superposition <span class="flag">default</span></h3>
+            <p>Every structure is fitted onto the first with PyMOL <span class="mono">super</span> using all atoms of the chain, then shown for 10 frames before the next one. The motion jumps from one real conformation to the next. PyMOL runs headless, so you get the GIF directly.</p>
+            <dl class="facts">
+              <dt>Atoms</dt><dd>All polymer atoms</dd>
+              <dt>Fit</dt><dd><span class="mono">super</span>, sequence-independent</dd>
+              <dt>Between states</dt><dd>None (10 frames per structure)</dd>
+              <dt>Needs</dt><dd>Open-source PyMOL</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="mode">
+          <div class="well">
+            <video data-auto muted loop playsinline preload="none"
+                   poster="media/4ake_align.jpg" src="media/4ake_align.mp4"
+                   aria-label="Adenylate kinase in structural alignment mode"></video>
+          </div>
+          <div class="mode-body">
+            <h3>Structural alignment</h3>
+            <p>Only the backbone is kept and fitted with PyMOL <span class="mono">align</span>. Then <span class="mono">morph</span> interpolates 30 frames between each consecutive pair, giving smooth continuous motion. The script writes the <span class="mono">.pml</span> file for you to run.</p>
+            <dl class="facts">
+              <dt>Atoms</dt><dd>Backbone: CA, C, N, O</dd>
+              <dt>Fit</dt><dd><span class="mono">align</span>, sequence-guided</dd>
+              <dt>Between states</dt><dd>Linear morph, 30 frames</dd>
+              <dt>Needs</dt><dd>PyMOL with <span class="mono">morph</span> (Incentive licence)</dd>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap">
+      <div class="spectrum-rule" aria-hidden="true"></div>
+      <h2>Gallery</h2>
+      <p class="section-intro">Seven proteins with well-known conformational changes. Use the buttons to switch between modes and chain selections. The input lists for every example are in the repository's <code>examples/</code> folder.</p>
+      <div class="gallery" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <section id="usage">
+    <div class="wrap">
+      <div class="spectrum-rule" aria-hidden="true"></div>
+      <h2>Usage</h2>
+      <p class="section-intro">The tool runs on Linux with conda. It needs an internet connection for the Entrez, BLAST and PDB steps, and ffmpeg so that PyMOL can encode the GIF.</p>
+      <div class="usage-grid">
+        <div>
+          <p class="label">Install</p>
+          <div class="code"><button class="copy" type="button">Copy</button><pre>git clone https://github.com/DonGazpachoWR/3D_protein_simulator.git
+cd 3D_protein_simulator
+conda env create -f environment.yml
+conda activate estructural
+sudo apt install ffmpeg -y</pre></div>
+
+          <p class="label">Full pipeline from a PDB code</p>
+          <div class="code"><button class="copy" type="button">Copy</button><pre>python MDsimulator.py -id 5OTX -o results/5otx</pre></div>
+
+          <p class="label">From a curated list, smooth morph</p>
+          <div class="code"><button class="copy" type="button">Copy</button><pre>python MDsimulator.py -l examples/4AKE/curated.txt \
+    -o results/4ake -m structural_alignment
+pymol results/4ake/molecular_dynamics_morph.pml</pre></div>
+
+          <p class="label">Several chains, fixed colour</p>
+          <div class="code"><button class="copy" type="button">Copy</button><pre>python MDsimulator.py -id 3QGK -o results/3qgk \
+    -ht 30 -c A,B,C -col green</pre></div>
+        </div>
+        <div>
+          <p class="label">Options</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Option</th><th>Default</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td><code>-id</code></td><td>–</td><td>PDB code; runs Entrez and BLAST.</td></tr>
+                <tr><td><code>-al</code></td><td>–</td><td>BLAST XML from a previous run (<code>alignment.txt</code>).</td></tr>
+                <tr><td><code>-l</code></td><td>–</td><td>One PDB code per line; sets order and reference. Takes precedence over <code>-al</code> and <code>-id</code>.</td></tr>
+                <tr><td><code>-o</code></td><td><code>.</code></td><td>Output directory.</td></tr>
+                <tr><td><code>-ht</code></td><td><code>5</code></td><td>Maximum BLAST hits.</td></tr>
+                <tr><td><code>-m</code></td><td><code>superposition</code></td><td><code>superposition</code> or <code>structural_alignment</code>.</td></tr>
+                <tr><td><code>-c</code></td><td><code>A</code></td><td>Chains, e.g. <code>A,B</code> or <code>A+B</code>.</td></tr>
+                <tr><td><code>-col</code></td><td><code>2</code></td><td><code>1</code> gradient by atom order, <code>2</code> by residue, or a PyMOL colour name.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="label" style="margin-top:24px">Output directory</p>
+          <div class="table-wrap">
+            <table>
+              <tbody>
+                <tr><td><code>alignment.txt</code></td><td>BLAST XML (only with <code>-id</code>)</td></tr>
+                <tr><td><code>pdbs/*.cif</code></td><td>Downloaded structures</td></tr>
+                <tr><td><code>filtered_pdb.txt</code></td><td>Structures kept, in animation order</td></tr>
+                <tr><td><code>*.pml</code></td><td>Generated PyMOL script</td></tr>
+                <tr><td><code>pymol_process.log</code></td><td>PyMOL log (superposition mode)</td></tr>
+                <tr><td><code>animated.gif</code></td><td>The animation</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="limits">
+    <div class="wrap">
+      <div class="spectrum-rule" aria-hidden="true"></div>
+      <h2>What to keep in mind</h2>
+      <p class="section-intro">The animation is only as meaningful as the structures and their order. These points cover most failed or misleading runs.</p>
+      <div class="limits">
+        <div class="limit">
+          <h3>It is an illustration, not a trajectory</h3>
+          <p>Linear interpolation moves every atom along a straight line, so intermediate frames can contain clashes or stretched bonds. Only the end points of each segment are experimental.</p>
+        </div>
+        <div class="limit">
+          <h3>Order the structures yourself</h3>
+          <p>Frames follow the BLAST ranking or your list, not a reaction coordinate. For a clean motion, list the structures from one end state to the other, for example apo to ligand-bound.</p>
+        </div>
+        <div class="limit">
+          <h3>Choose a typical reference</h3>
+          <p>The atom-count filter compares every file with the first. If that structure is a fragment or a large complex, most of the others are discarded. Check <code>filtered_pdb.txt</code>.</p>
+        </div>
+        <div class="limit">
+          <h3>Watch the chain names</h3>
+          <p>Many entries label chains inconsistently. The script maps label IDs to author IDs, but an empty or partial frame usually means the chain selection needs adjusting.</p>
+        </div>
+        <div class="limit">
+          <h3>Start each list in a clean folder</h3>
+          <p>The filter reads every file in <code>pdbs/</code>, so leftover structures from an earlier run end up in the animation. Delete them or use a new output directory.</p>
+        </div>
+        <div class="limit">
+          <h3>Morphing needs a licensed PyMOL</h3>
+          <p>The <code>morph</code> command is part of Incentive PyMOL. With open-source PyMOL, use superposition mode, which works without it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Adrián Berenguer Agustí · Structural bioinformatics final project</span>
+    <span><a href="https://github.com/DonGazpachoWR/3D_protein_simulator">Source on GitHub</a> · Structures from the <a href="https://www.rcsb.org/">RCSB PDB</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // Each card offers one or more renderings of the same protein family.
+  const EXAMPLES = [
+    {
+      name: "Adenylate kinase", pdb: "4AKE",
+      text: "E. coli enzyme that closes its LID and NMP domains over the substrates. Open apo form (4AKE) to the Ap5A-bound closed form (1AKE).",
+      meta: "Chain A · 4 structures: 3HPQ, 4AKE, 1E4Y, 1AKE",
+      views: [["Alignment", "4ake_align"], ["Superposition", "4ake_super"]]
+    },
+    {
+      name: "Maltodextrin-binding protein", pdb: "1OMP",
+      text: "Periplasmic binding protein whose two domains twist around a hinge to trap maltose and maltotriose.",
+      meta: "Chain A · 8 structures",
+      views: [["Alignment", "1omp_align"], ["Superposition", "1omp_super"]]
+    },
+    {
+      name: "Calmodulin", pdb: "1QX5",
+      text: "Calcium sensor that rearranges its two calcium-binding lobes and the linker between them between the apo, Ca²⁺-bound and peptide-bound forms.",
+      meta: "Chain A · 7 structures, X-ray and NMR",
+      views: [["Alignment", "1qx5_align"], ["Superposition", "1qx5_super"]]
+    },
+    {
+      name: "GLP-1 receptor ECD", pdb: "5OTX",
+      text: "Extracellular domain of the GLP-1 receptor bound to different GLP-1 peptide variants. Monomer from BLAST hits; dimer from a curated list.",
+      meta: "Chain A (monomer) · chains A,C (dimer)",
+      views: [["Monomer · align", "5otx_monomer_align"], ["Monomer · super", "5otx_monomer_super"],
+              ["Dimer · align", "5otx_dimer_align"], ["Dimer · super", "5otx_dimer_super"]]
+    },
+    {
+      name: "Troponin C", pdb: "1TN4",
+      text: "Four-calcium form of the muscle calcium sensor. Morph rendered with RigiMOL by an earlier version of the script.",
+      meta: "Chain A · 2 structures: 2TN4, 1TN4",
+      views: [["Alignment", "1tn4_align"], ["Superposition", "1tn4_super"]]
+    },
+    {
+      name: "Acetylcholinesterase", pdb: "1EEA",
+      text: "Large serine hydrolase. The automatic search failed on several hits, so the animation uses a curated list of ligand complexes.",
+      meta: "Chain A · 11 structures",
+      views: [["Alignment", "1eea_align"], ["Superposition", "1eea_super"]]
+    },
+    {
+      name: "Urease", pdb: "3QGK",
+      text: "Urea-hydrolysing enzyme rendered as a trimer of chains A, B and C in a single colour. BLAST run with 30 hits, or a curated pair of ureases.",
+      meta: "Chains A,B,C · BLAST set or 1E9Y, 1S3T",
+      views: [["BLAST · align", "3qgk_trimer_align"], ["BLAST · super", "3qgk_trimer_super"],
+              ["Curated · align", "3qgk_curated_align"], ["Curated · super", "3qgk_curated_super"]]
+    }
+  ];
+
+  const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Play videos only while visible, to save bandwidth and CPU.
+  const observer = "IntersectionObserver" in window
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            video.play().catch(function () {});
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.25 })
+    : null;
+
+  function prepare(video) {
+    if (REDUCED) {
+      video.controls = true;
+    } else if (observer) {
+      observer.observe(video);
+    } else {
+      video.autoplay = true;
+    }
+  }
+
+  function buildCard(example) {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const well = document.createElement("div");
+    well.className = "well";
+    const video = document.createElement("video");
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = "none";
+    video.setAttribute("aria-label", example.name + " animation");
+    well.appendChild(video);
+
+    const body = document.createElement("div");
+    body.className = "card-body";
+    body.innerHTML =
+      '<div class="card-title"><h3></h3><span class="pdb"></span></div>' +
+      '<div class="seg" role="group"></div><p></p><div class="meta"></div>';
+    body.querySelector("h3").textContent = example.name;
+    body.querySelector(".pdb").textContent = example.pdb;
+    body.querySelector("p").textContent = example.text;
+    body.querySelector(".meta").textContent = example.meta;
+    const seg = body.querySelector(".seg");
+    seg.setAttribute("aria-label", example.name + " view");
+
+    function show(file, button) {
+      seg.querySelectorAll("button").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b === button));
+      });
+      video.poster = "media/" + file + ".jpg";
+      video.src = "media/" + file + ".mp4";
+      if (!REDUCED && button.dataset.user) {
+        video.play().catch(function () {});
+      }
+    }
+
+    example.views.forEach(function (view, i) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = view[0];
+      button.addEventListener("click", function () {
+        button.dataset.user = "1";
+        show(view[1], button);
+      });
+      seg.appendChild(button);
+      if (i === 0) {
+        show(view[1], button);
+      }
+    });
+
+    card.appendChild(well);
+    card.appendChild(body);
+    prepare(video);
+    return card;
+  }
+
+  const grid = document.getElementById("gallery-grid");
+  EXAMPLES.forEach(function (example) {
+    grid.appendChild(buildCard(example));
+  });
+  document.querySelectorAll("video[data-auto]").forEach(prepare);
+
+  document.querySelectorAll(".copy").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const text = button.nextElementSibling.textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        button.textContent = "Copied";
+        setTimeout(function () { button.textContent = "Copy"; }, 1500);
+      }).catch(function () {});
+    });
+  });
+})();
+</script>
+</body>
+</html>
